@@ -1,6 +1,5 @@
 ﻿using GeoJsonRandom.Core.Models;
 using NetTopologySuite.Features;
-using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using Newtonsoft.Json;
 
@@ -17,6 +16,7 @@ namespace GeoJsonRandom.Core.Services
             _root = new Lazy<GeoTreeNode>(InitData, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
+        /// <summary> 回傳PreifxTree (如未建立則先建立) </summary>
         public GeoTreeNode GetOrBuildTree() => _root.Value;
 
         private GeoTreeNode InitData()

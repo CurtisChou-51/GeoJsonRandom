@@ -29,16 +29,16 @@ namespace GeoJsonRandom.Controllers
         }
 
         [HttpPost]
-        public IActionResult Towns(GeoDataConditionModel dto)
+        public IActionResult Towns(GeoDataConditionModel vm)
         {
-            var result = _geoDataService.GetTowns(dto.County).ToList();
+            var result = _geoDataService.GetTowns(vm.County).ToList();
             return Ok(new { data = result });
         }
 
         [HttpPost]
-        public IActionResult Villages(GeoDataConditionModel dto)
+        public IActionResult Villages(GeoDataConditionModel vm)
         {
-            var result = _geoDataService.GetVillages(dto.County, dto.Town).ToList();
+            var result = _geoDataService.GetVillages(vm.County, vm.Town).ToList();
             return Ok(new { data = result });
         }
 
