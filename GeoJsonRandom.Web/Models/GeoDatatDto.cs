@@ -1,6 +1,6 @@
 ﻿namespace GeoJsonRandom.Models
 {
-    public class GeoDataResultDto
+    public class GeoDataResultModel
     {
         public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
@@ -9,7 +9,7 @@
         public string? Village { get; set; }
     }
 
-    public class GeoDataConditionDto
+    public class GeoDataConditionModel
     {
         public string? County { get; set; }
         public string? Town { get; set; }

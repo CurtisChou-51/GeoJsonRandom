@@ -1,6 +1,6 @@
 ﻿using NetTopologySuite.Geometries;
 
-namespace GeoJsonRandom.Core
+namespace GeoJsonRandom.Core.Helpers
 {
     public static class RandomHelper
     {

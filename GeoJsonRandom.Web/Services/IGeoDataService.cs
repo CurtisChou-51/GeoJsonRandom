@@ -1,4 +1,5 @@
-﻿using GeoJsonRandom.Models;
+﻿using GeoJsonRandom.Core.Models;
+using GeoJsonRandom.Models;
 
 namespace GeoJsonRandom.Services
 {
@@ -14,12 +15,12 @@ namespace GeoJsonRandom.Services
         IEnumerable<string> GetVillages(string? county, string? town);
 
         /// <summary> 產生隨機點位 </summary>
-        IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionDto dto);
+        IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionModel vm);
 
         /// <summary> 產生隨機點位JsonFile </summary>
-        Stream GenerateRandomPointsJsonFile(GeoDataConditionDto dto);
+        Stream GenerateRandomPointsJsonFile(GeoDataConditionModel vm);
 
         /// <summary> 產生隨機點位CsvFile </summary>
-        Stream GenerateRandomPointsCsvFile(GeoDataConditionDto dto);
+        Stream GenerateRandomPointsCsvFile(GeoDataConditionModel vm);
     }
 }
