@@ -1,10 +1,10 @@
-﻿using GeoJsonRandom.Models;
+﻿using GeoJsonRandom.Core.Models;
 using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using Newtonsoft.Json;
 
-namespace GeoJsonRandom.Core
+namespace GeoJsonRandom.Core.Services
 {
     public class GeoJsonPrefixTreeBuilder : IGeoJsonPrefixTreeBuilder
     {

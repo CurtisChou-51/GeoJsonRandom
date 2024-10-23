@@ -1,6 +1,7 @@
-﻿using GeoJsonRandom.Models;
+﻿using GeoJsonRandom.Core.Helpers;
+using GeoJsonRandom.Core.Models;
 
-namespace GeoJsonRandom.Core
+namespace GeoJsonRandom.Core.Services
 {
     public class GeoJsonRandomPointGenerator : IGeoJsonRandomPointGenerator
     {
@@ -24,13 +25,13 @@ namespace GeoJsonRandom.Core
         }
 
         /// <summary> 產生隨機點位 </summary>
-        public IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionDto dto)
+        public IEnumerable<GeoDataResultDto> GenerateRandomPoints(string?[] adminHierarchy, int takeCount)
         {
-            GeoTreeNode? node = FindNode([dto.County, dto.Town, dto.Village]);
+            GeoTreeNode? node = FindNode(adminHierarchy);
             if (node == null)
                 yield break;
-            int takeCount = dto.TakeCount;
-            while (takeCount > 0)
+            int remainCount = takeCount;
+            while (remainCount > 0)
             {
                 GeoTreeNode leaf = GetRandomLeafFromNode(node);
                 if (leaf.Geo == null)
@@ -44,7 +45,7 @@ namespace GeoJsonRandom.Core
                     Latitude = lat,
                     Longitude = lng
                 };
-                takeCount--;
+                remainCount--;
             }
         }
 

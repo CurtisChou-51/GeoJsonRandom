@@ -1,4 +1,4 @@
-using GeoJsonRandom.Core;
+using GeoJsonRandom.Core.Services;
 using GeoJsonRandom.Services;
 
 namespace GeoJsonRandom

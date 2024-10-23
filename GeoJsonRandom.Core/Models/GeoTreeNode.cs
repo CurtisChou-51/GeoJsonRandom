@@ -1,6 +1,6 @@
 ﻿using NetTopologySuite.Geometries;
 
-namespace GeoJsonRandom.Models
+namespace GeoJsonRandom.Core.Models
 {
     public class GeoTreeNode
     {

@@ -18,8 +18,8 @@ namespace GeoJsonRandom.Controllers.Api
         [HttpGet("{takeCount}/{county?}/{town?}/{village?}")]
         public IActionResult RandomPoints(int takeCount, string? county, string? town, string? village)
         {
-            var dto = new GeoDataConditionDto { TakeCount = takeCount, County = county, Town = town, Village = village };
-            List<GeoDataResultDto> result = _geoDataService.GenerateRandomPoints(dto).ToList();
+            var dto = new GeoDataConditionModel { TakeCount = takeCount, County = county, Town = town, Village = village };
+            var result = _geoDataService.GenerateRandomPoints(dto).ToList();
             return Ok(result);
         }
     }

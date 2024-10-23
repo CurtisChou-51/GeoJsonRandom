@@ -1,4 +1,5 @@
-﻿using GeoJsonRandom.Core;
+﻿using GeoJsonRandom.Core.Models;
+using GeoJsonRandom.Core.Services;
 using GeoJsonRandom.Models;
 using Newtonsoft.Json;
 using System.Text;
@@ -37,16 +38,16 @@ namespace GeoJsonRandom.Services
         }
 
         /// <summary> 產生隨機點位 </summary>
-        public IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionDto dto)
+        public IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionModel vm)
         {
-            dto.TakeCount = Math.Min(dto.TakeCount, 1000);
-            return _geoJsonRandomPointGenerator.GenerateRandomPoints(dto);
+            vm.TakeCount = Math.Min(vm.TakeCount, 1000);
+            return _geoJsonRandomPointGenerator.GenerateRandomPoints([vm.County, vm.Town, vm.Village], vm.TakeCount);
         }
 
         /// <summary> 產生隨機點位JsonFile </summary>
-        public Stream GenerateRandomPointsJsonFile(GeoDataConditionDto dto)
+        public Stream GenerateRandomPointsJsonFile(GeoDataConditionModel vm)
         {
-            var result = GenerateRandomPoints(dto);
+            var result = GenerateRandomPoints(vm);
             MemoryStream stream = new MemoryStream();
             using StreamWriter writer = new StreamWriter(stream, Encoding.UTF8, leaveOpen: true);
             JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
@@ -57,9 +58,9 @@ namespace GeoJsonRandom.Services
         }
 
         /// <summary> 產生隨機點位CsvFile </summary>
-        public Stream GenerateRandomPointsCsvFile(GeoDataConditionDto dto)
+        public Stream GenerateRandomPointsCsvFile(GeoDataConditionModel vm)
         {
-            var result = GenerateRandomPoints(dto);
+            var result = GenerateRandomPoints(vm);
             MemoryStream stream = new MemoryStream();
             using StreamWriter writer = new StreamWriter(stream, Encoding.UTF8, leaveOpen: true);
             writer.WriteLine("縣市,鄉鎮,村里,緯度,經度");

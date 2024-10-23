@@ -29,37 +29,37 @@ namespace GeoJsonRandom.Controllers
         }
 
         [HttpPost]
-        public IActionResult Towns(GeoDataConditionDto dto)
+        public IActionResult Towns(GeoDataConditionModel dto)
         {
             var result = _geoDataService.GetTowns(dto.County).ToList();
             return Ok(new { data = result });
         }
 
         [HttpPost]
-        public IActionResult Villages(GeoDataConditionDto dto)
+        public IActionResult Villages(GeoDataConditionModel dto)
         {
             var result = _geoDataService.GetVillages(dto.County, dto.Town).ToList();
             return Ok(new { data = result });
         }
 
         [HttpPost]
-        public IActionResult RandomPoints(GeoDataConditionDto dto)
+        public IActionResult RandomPoints(GeoDataConditionModel vm)
         {
-            var result = _geoDataService.GenerateRandomPoints(dto).ToList();
+            var result = _geoDataService.GenerateRandomPoints(vm).ToList();
             return Ok(new { data = result });
         }
 
         [HttpPost]
-        public IActionResult RandomPointsJsonFile(GeoDataConditionDto dto)
+        public IActionResult RandomPointsJsonFile(GeoDataConditionModel vm)
         {
-            var stream = _geoDataService.GenerateRandomPointsJsonFile(dto);
+            var stream = _geoDataService.GenerateRandomPointsJsonFile(vm);
             return File(stream, "application/json", "data.json");
         }
 
         [HttpPost]
-        public IActionResult RandomPointsCsvFile(GeoDataConditionDto dto)
+        public IActionResult RandomPointsCsvFile(GeoDataConditionModel vm)
         {
-            var stream = _geoDataService.GenerateRandomPointsCsvFile(dto);
+            var stream = _geoDataService.GenerateRandomPointsCsvFile(vm);
             return File(stream, "text/csv", "data.csv");
         }
     }

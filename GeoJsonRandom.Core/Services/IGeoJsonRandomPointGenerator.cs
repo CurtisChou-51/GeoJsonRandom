@@ -1,6 +1,6 @@
-﻿using GeoJsonRandom.Models;
+﻿using GeoJsonRandom.Core.Models;
 
-namespace GeoJsonRandom.Core
+namespace GeoJsonRandom.Core.Services
 {
     public interface IGeoJsonRandomPointGenerator
     {
@@ -8,6 +8,6 @@ namespace GeoJsonRandom.Core
         IEnumerable<string> GetDirectAdminNames(string?[] adminHierarchy);
 
         /// <summary> 產生隨機點位 </summary>
-        IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionDto dto);
+        IEnumerable<GeoDataResultDto> GenerateRandomPoints(string?[] adminHierarchy, int takeCount);
     }
 }
