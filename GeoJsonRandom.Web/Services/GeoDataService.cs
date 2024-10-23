@@ -1,4 +1,4 @@
-﻿using GeoJsonRandom.Core.Models;
+﻿using AutoMapper;
 using GeoJsonRandom.Core.Services;
 using GeoJsonRandom.Models;
 using Newtonsoft.Json;
@@ -9,10 +9,12 @@ namespace GeoJsonRandom.Services
     public class GeoDataService : IGeoDataService
     {
         private readonly IGeoJsonRandomPointGenerator _geoJsonRandomPointGenerator;
+        private readonly IMapper _mapper;
 
-        public GeoDataService(IGeoJsonRandomPointGenerator geoJsonRandomPointGenerator)
+        public GeoDataService(IGeoJsonRandomPointGenerator geoJsonRandomPointGenerator, IMapper mapper)
         {
             _geoJsonRandomPointGenerator = geoJsonRandomPointGenerator;
+            _mapper = mapper;
         }
 
         /// <summary> 取得縣市 </summary>
@@ -38,10 +40,11 @@ namespace GeoJsonRandom.Services
         }
 
         /// <summary> 產生隨機點位 </summary>
-        public IEnumerable<GeoDataResultDto> GenerateRandomPoints(GeoDataConditionModel vm)
+        public IEnumerable<GeoDataResultModel> GenerateRandomPoints(GeoDataConditionModel vm)
         {
             vm.TakeCount = Math.Min(vm.TakeCount, 1000);
-            return _geoJsonRandomPointGenerator.GenerateRandomPoints([vm.County, vm.Town, vm.Village], vm.TakeCount);
+            var result = _geoJsonRandomPointGenerator.GenerateRandomPoints([vm.County, vm.Town, vm.Village], vm.TakeCount);
+            return _mapper.Map<IEnumerable<GeoDataResultModel>>(result);
         }
 
         /// <summary> 產生隨機點位JsonFile </summary>

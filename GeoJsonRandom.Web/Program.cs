@@ -11,6 +11,9 @@ namespace GeoJsonRandom
 
             // json序列化時不自動將字首小寫
             builder.Services.AddControllersWithViews().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
             builder.Services.AddSingleton<IGeoJsonPrefixTreeBuilder>(sp => new GeoJsonPrefixTreeBuilder(builder.Configuration["GeojsonPath"] ?? string.Empty));
             builder.Services.AddScoped<IGeoJsonRandomPointGenerator, GeoJsonRandomPointGenerator>();
             builder.Services.AddScoped<IGeoDataService, GeoDataService>();
