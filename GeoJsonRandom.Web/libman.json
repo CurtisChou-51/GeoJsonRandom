@@ -1,0 +1,18 @@
+{
+    "version": "1.0",
+    "defaultProvider": "cdnjs",
+    "libraries": [
+        {
+            "library": "leaflet@1.9.4",
+            "destination": "wwwroot/lib/leaflet/"
+        },
+        {
+            "provider": "cdnjs",
+            "library": "vue@3.5.12",
+            "destination": "wwwroot/lib/vue/",
+            "files": [
+                "vue.global.min.js"
+            ]
+        }
+    ]
+}
