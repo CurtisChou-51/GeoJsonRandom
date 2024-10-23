@@ -1,0 +1,76 @@
+﻿<div id="app">
+    <h1>台灣隨機地理位置產生</h1>
+    <form ref="mainForm" asp-action="" method="post" target="_blank" v-on:submit.prevent="onSubmit">
+        <div class="row">
+            <div class="col">
+                <label>取點數：</label>
+                <input type="number" name="takeCount" v-model="mainFormData.takeCount" placeholder="樣本筆數" min="1" max="1000" v-on:input="takeCountInput">
+            </div>
+            <div class="col">
+                <label>縣市：</label>
+                <select name="county" v-model="mainFormData.county" v-on:change="countyChange">
+                    <option value="">請選擇縣市</option>
+                    <option v-for="county in counties" :key="county" :value="county">
+                        {{ county }}
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label>鄉鎮：</label>
+                <select name="town" v-model="mainFormData.town" v-on:change="townChange">
+                    <option value="">請選擇鄉鎮</option>
+                    <option v-for="town in towns" :key="town" :value="town">
+                        {{ town }}
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label>村里：</label>
+                <select name="village" v-model="mainFormData.village">
+                    <option value="">請選擇村里</option>
+                    <option v-for="village in villages" :key="village" :value="village">
+                        {{ village }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" v-on:click="renderPage">頁面顯示</button>
+                <button type="button" v-on:click="renderMap">地圖顯示</button>
+                <button type="button" v-on:click="downloadJson">下載Json</button>
+                <button type="button" v-on:click="downloadCsv">下載Csv</button>
+            </div>
+        </div>
+    </form>
+    <div class="renderMode" v-bind:class="{ active: mode === 1 }">
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>縣市</th>
+                        <th>鄉鎮</th>
+                        <th>村里</th>
+                        <th>緯度</th>
+                        <th>經度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in tableData">
+                        <td>{{ item.County }}</td>
+                        <td>{{ item.Town }}</td>
+                        <td>{{ item.Village }}</td>
+                        <td>{{ item.Latitude }}</td>
+                        <td>{{ item.Longitude }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="renderMode" v-bind:class="{ active: mode === 2 }">
+        <div ref="mainMap" id="Map" style="width:100%; height:800px;">
+        </div>
+    </div>
+</div>
+
+<script src="~/cust/home-index.js" asp-append-version="true"></script>
