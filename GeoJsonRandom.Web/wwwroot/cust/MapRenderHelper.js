@@ -10,12 +10,12 @@ class MapRenderHelper {
             'IconHeight': 32,
             'ClusterColor': '#000000',
             'ClusterSize': childCount => {
-                let minSize = 35, maxSize = 75, rate = 0.3;
-                return Math.min(minSize + childCount * rate, maxSize);
+                let minSize = 35, maxSize = 80, rate = 0.2;
+                return Math.min(minSize + childCount * rate, maxSize).toFixed(2);
             },
             'ClusterFontSize': childCount => {
-                let minSize = 15, maxSize = 30, rate = 0.03;
-                return Math.min(minSize + childCount * rate, maxSize);
+                let minSize = 15, maxSize = 28, rate = 0.03;
+                return `${Math.min(minSize + childCount * rate, maxSize).toFixed(2)}px`;
             }
         }
         this._markers = [];
@@ -110,9 +110,9 @@ class MapRenderHelper {
             showCoverageOnHover: false,
             iconCreateFunction: function (cluster) {
                 let childCount = cluster.getChildCount();
-                let size = self._getSetting('ClusterSize', childCount).toFixed(2);
+                let size = self._getSetting('ClusterSize', childCount);
                 let color = self._getSetting('ClusterColor', childCount);
-                let fontSize = self._getSetting('ClusterFontSize', childCount).toFixed(2);
+                let fontSize = self._getSetting('ClusterFontSize', childCount);
                 return L.divIcon({
                     html: `<div class='marker-circle' style='background-color:${color}; font-size:${fontSize};'>${childCount}</div>`,
                     className: 'marker-cluster',

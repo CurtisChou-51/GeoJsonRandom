@@ -69,7 +69,7 @@
                 const resp = await postAjax('/Home/RandomPoints');
                 if (!resp.ReqFail) {
                     helper = helper ?? initMap(mainMap.value);
-                    helper.clear().addData(resp.data).render();
+                    helper.clear().addData(resp.data).renderCluster();
                 }
                 uiHelper.loadingEnd();
             }
@@ -115,6 +115,7 @@
         L.tileLayer("https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}", { maxZoom: 20 }).addTo(map);
         return new MapRenderHelper(map)
             .setIconUrl("cust/placeholder.png")
+            .setClusterColor("#f8ca05")
             .setMarkerClick(function (data, popup) {
                 popup.show(`
 <table class="detail_popup_table">
