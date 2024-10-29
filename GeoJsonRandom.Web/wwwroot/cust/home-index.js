@@ -5,7 +5,7 @@
 
     createApp({
         setup() {
-            let helper;
+            let mapRenderHelper;
             onMounted(async () => {
                 uiHelper.loadingStart();
                 const resp = await postAjax('/Home/Counties');
@@ -16,9 +16,12 @@
 
             const counties = ref([]), towns = ref([]), villages = ref([]);
             const mainFormData = ref({ county: '', town: '', village: '', takeCount: 10 });
-            const tableData = ref([]), mode = ref(1);
+            const tableData = ref([]), mode = ref(1), mapRenderCluster = ref(true);
             const mainForm = ref(null), mainMap = ref(null);
 
+            /**
+             * 改變縣市事件
+             */
             async function countyChange() {
                 mainFormData.value.town = '';
                 towns.value = [];
@@ -31,6 +34,9 @@
                     towns.value = resp.data;
             }
 
+            /**
+             * 改變鄉鎮事件
+             */
             async function townChange() {
                 mainFormData.value.village = '';
                 villages.value = [];
@@ -41,17 +47,40 @@
                     villages.value = resp.data;
             }
 
-
+            /**
+             * 主表單提交事件
+             */
             function onSubmit() {
                 return false;
             }
 
+            /**
+             * 取樣點數輸入事件
+             */
             function takeCountInput() {
                 let takeCount = parseInt(mainFormData.value.takeCount);
                 if (isNaN(takeCount) || !isFinite(takeCount))
                     takeCount = 10;
                 takeCount = Math.min(Math.max(takeCount, 1), 1000);
                 mainFormData.value.takeCount = takeCount;
+            }
+
+            /**
+             * 地圖渲染checkbox改變事件
+             */
+            function mapRenderClusterChange() {
+                mapRenderHelper.clear(true);
+                renderMapClusterOrScatter();
+            }
+
+            /**
+             * 地圖渲染為cluster或是scatter (由 checkbox mapRenderCluster 決定)
+             */
+            function renderMapClusterOrScatter() {
+                if (mapRenderCluster.value)
+                    mapRenderHelper.renderCluster();
+                else
+                    mapRenderHelper.render();
             }
 
             function postAjax(url) {
@@ -63,17 +92,24 @@
                 mainForm.value.submit();
             }
 
+            /**
+             * 地圖顯示資料
+             */
             async function renderMap() {
                 uiHelper.loadingStart();
                 mode.value = 2;
                 const resp = await postAjax('/Home/RandomPoints');
                 if (!resp.ReqFail) {
-                    helper = helper ?? initMap(mainMap.value);
-                    helper.clear().addData(resp.data).renderCluster();
+                    mapRenderHelper = mapRenderHelper ?? initMap(mainMap.value);
+                    mapRenderHelper.clear().addData(resp.data);
+                    renderMapClusterOrScatter();
                 }
                 uiHelper.loadingEnd();
             }
 
+            /**
+             * 頁面顯示資料
+             */
             async function renderPage() {
                 uiHelper.loadingStart();
                 mode.value = 1;
@@ -92,9 +128,9 @@
             }
 
             return {
-                mainFormData, tableData, mode,
+                mainFormData, tableData, mode, mapRenderCluster,
                 counties, towns, villages,
-                countyChange, townChange, onSubmit, takeCountInput,
+                countyChange, townChange, onSubmit, takeCountInput, mapRenderClusterChange,
                 renderPage, renderMap, downloadJson, downloadCsv,
                 mainForm, mainMap
             }
