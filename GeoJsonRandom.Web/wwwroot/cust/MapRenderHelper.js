@@ -1,4 +1,4 @@
-
+﻿
 class MapRenderHelper {
 
     constructor(map) {
@@ -23,10 +23,16 @@ class MapRenderHelper {
         self._custPopup = new CustMapPopup();
     }
 
-    _getSetting(attr, item) {
-        let setting = this._settingDic[attr];
+    /**
+     * 取得設定值
+     * @param {string} key - 設定的 key 名稱
+     * @param {...*} args - 當 key 對應的值是函式時，將 args 作為參數列表傳入該函式
+     * @returns {*} - 回傳設定值，或是函式的回傳值
+     */
+    _getSetting(key, ...args) {
+        let setting = this._settingDic[key];
         if (typeof setting === 'function')
-            return setting(item);
+            return setting(...args);
         return setting;
     }
 
@@ -62,11 +68,13 @@ class MapRenderHelper {
 
     /**
      * 設置群聚大小
+     * @param {function(number) | *} f - 可以是接收 childCount(number) 的函式，可由childCount動態決定群聚大小
      */
     setClusterSize(f) { return this._settingDic['ClusterSize'] = f, this; }
 
     /**
      * 設置群聚文字大小
+     * @param {function(number) | *} f - 可以是接收 childCount(number) 的函式，可由childCount動態決定群聚文字大小
      */
     setClusterFontSize(f) { return this._settingDic['ClusterFontSize'] = f, this; }
 

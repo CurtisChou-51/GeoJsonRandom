@@ -50,7 +50,7 @@ label {
     margin-bottom: 5px;
 }
 
-select, input {
+select, input[type='text'], input[type='number'] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
