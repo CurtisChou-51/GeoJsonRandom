@@ -14,7 +14,8 @@ namespace GeoJsonRandom
 
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-            builder.Services.AddSingleton<IGeoJsonPrefixTreeBuilder>(sp => new GeoJsonPrefixTreeBuilder(builder.Configuration["GeojsonPath"] ?? string.Empty));
+            builder.Services.AddSingleton<IGeoJsonLoader>(sp => new FileGeoJsonLoader(builder.Configuration["GeojsonPath"] ?? string.Empty));
+            builder.Services.AddSingleton<IGeoJsonPrefixTreeBuilder, GeoJsonPrefixTreeBuilder>();
             builder.Services.AddScoped<IGeoJsonRandomPointGenerator, GeoJsonRandomPointGenerator>();
             builder.Services.AddScoped<IGeoDataService, GeoDataService>();
 

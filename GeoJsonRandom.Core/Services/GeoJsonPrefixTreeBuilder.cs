@@ -1,18 +1,16 @@
 ﻿using GeoJsonRandom.Core.Models;
 using NetTopologySuite.Features;
-using NetTopologySuite.IO;
-using Newtonsoft.Json;
 
 namespace GeoJsonRandom.Core.Services
 {
     public class GeoJsonPrefixTreeBuilder : IGeoJsonPrefixTreeBuilder
     {
-        private string _geojsonPath;
+        private readonly IGeoJsonLoader _loader;
         private readonly Lazy<GeoTreeNode> _root;
 
-        public GeoJsonPrefixTreeBuilder(string geojsonPath)
+        public GeoJsonPrefixTreeBuilder(IGeoJsonLoader loader)
         {
-            _geojsonPath = geojsonPath;
+            _loader = loader;
             _root = new Lazy<GeoTreeNode>(InitData, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
@@ -22,22 +20,13 @@ namespace GeoJsonRandom.Core.Services
         private GeoTreeNode InitData()
         {
             GeoTreeNode root = new GeoTreeNode { Name = "Root" };
-            FeatureCollection? featureCollection = LoadGeoJson(_geojsonPath);
+            FeatureCollection? featureCollection = _loader.Load();
             if (featureCollection == null)
                 return root;
 
             foreach (IFeature feature in featureCollection)
                 AddFeatureToTree(root, feature);
             return root;
-        }
-
-        private static FeatureCollection? LoadGeoJson(string filePath)
-        {
-            //using var reader = new StringReader(File.ReadAllText(filePath));
-            using var reader = new StreamReader(filePath);
-            using var jsonReader = new JsonTextReader(reader);
-            JsonSerializer serializer = GeoJsonSerializer.Create();
-            return serializer.Deserialize<FeatureCollection>(jsonReader);
         }
 
         private static void AddFeatureToTree(GeoTreeNode root, IFeature feature)
