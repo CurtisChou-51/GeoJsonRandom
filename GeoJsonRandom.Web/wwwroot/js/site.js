@@ -1,17 +1,4 @@
-﻿class EventEmitter {
-    constructor() {
-        this.events = {};
-    }
-
-    subscribe(name, cb) {
-        (this.events[name] || (this.events[name] = [])).push(cb);
-    }
-
-    emit(name, ...args) {
-        (this.events[name] || []).forEach(fn => fn(...args));
-    }
-}
-
+﻿
 const uiHelper = (function () {
     Notiflix.Report.init({
         backOverlayClickToClose: true,

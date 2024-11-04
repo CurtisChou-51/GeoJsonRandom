@@ -43,7 +43,7 @@
             </div>
         </div>
     </form>
-    <div class="renderMode" v-bind:class="{ active: mode === 1 }">
+    <div class="renderMode" v-bind:class="{ active: dataRenderMode === 1 }">
         <div class="table-section">
             <table>
                 <thead>
@@ -67,7 +67,7 @@
             </table>
         </div>
     </div>
-    <div class="renderMode" v-bind:class="{ active: mode === 2 }">
+    <div class="renderMode" v-bind:class="{ active: dataRenderMode === 2 }">
         <label>
             <input type="checkbox" v-model="mapRenderCluster" v-on:change="mapRenderClusterChange" />
             <span>群聚(Cluster)顯示</span>

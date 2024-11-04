@@ -1,4 +1,9 @@
-﻿
+﻿/**
+ * MapRenderHelper 自製的 Leaflet 地圖渲染輔助工具，主要提供以下功能：
+ * 1. 標記點(Marker)的設定
+ * 2. 群聚(Cluster)的設定
+ * 3. 彈出視窗(Popup)的設定
+ */
 class MapRenderHelper {
 
     constructor(map) {
@@ -186,6 +191,9 @@ class MapRenderHelper {
     }
 }
 
+/**
+ * CustMapPopup 地圖彈出視窗包裝類別
+ */
 class CustMapPopup {
     constructor() {
 
