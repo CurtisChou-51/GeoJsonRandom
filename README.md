@@ -1,8 +1,8 @@
 # GeoJsonRandom - 台灣地理位置隨機產生器
 
 ## 專案簡介
-GeoJsonRandom 是一個基於 GeoJSON 資料的隨機地理位置產生工具。此工具可以根據實際地理資料產生合理的隨機座標，快速取得台灣本島與離島的測試用地理位置資料。
-目前已部署於 Azure：[台灣地理位置隨機產生器](https://geojsonrandom20241021100422.azurewebsites.net/)
+- GeoJsonRandom 是一個基於 GeoJSON 資料的隨機地理位置產生工具。此工具可以根據實際地理資料產生合理的隨機座標，快速取得台灣本島與離島的測試用地理位置資料
+- 目前已部署於 Azure：[台灣地理位置隨機產生器](https://geojsonrandom20241021100422.azurewebsites.net/)
 
 ## 主要功能
 - 支援三個層級行政區域（縣市、鄉鎮、村里）檢索，生成符檢索範圍的隨機位置資訊
@@ -57,7 +57,7 @@ Web 應用模組，提供：
 ### 參數
 - takeCount：要產生的隨機點數量
 - county：縣市名稱
-- town：行政區名稱
+- town：鄉鎮名稱
 - village：村里名稱
 
 ### 範例
