@@ -51,9 +51,44 @@ Web 應用模組，提供：
 
 ## API 使用範例
 
+### 端點
+- GET /api/GeoData/RandomPoints/{takeCount}/{county}/{town}/{village}
+
+### 參數
+- takeCount：要產生的隨機點數量
+- county：縣市名稱
+- town：行政區名稱
+- village：村里名稱
+
+### 範例
+- /api/GeoData/RandomPoints/10
+- /api/GeoData/RandomPoints/10/新北市
+- /api/GeoData/RandomPoints/10/新北市/三重區
+- /api/GeoData/RandomPoints/10/新北市/三重區/培德里
+
+### 回應格式
+```json
+[
+  {
+    "Longitude": 120.200429,
+    "Latitude": 22.947739,
+    "County": "臺南市",
+    "Town": "南區",
+    "Village": "喜東里"
+  },
+  {
+    "Longitude": 121.005155,
+    "Latitude": 22.852315,
+    "County": "臺東縣",
+    "Town": "延平鄉",
+    "Village": "紅葉村"
+  }
+]
+```
 
 ## 資料來源
-- [內政部國土測繪中心開放資料](https://data.gov.tw/dataset/7441) 下載檔案
+- 本專案使用資料方式為讀取實體 JSON 檔案 [VILLAGE_NLSC_1130807_clear.json](GeoJsonRandom.Web/VILLAGE_NLSC_1130807_clear.json)
+- 於 [內政部國土測繪中心開放資料](https://data.gov.tw/dataset/7441) 下載 SHP 檔案
 - 再將 SHP 檔轉換為 GeoJSON 格式，實測後使用 [Mapshaper](https://mapshaper.org/) 沒有亂碼問題
 
 ## 目前實作與限制
