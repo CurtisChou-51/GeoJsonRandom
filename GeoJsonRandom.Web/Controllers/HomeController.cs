@@ -21,42 +21,42 @@ namespace GeoJsonRandom.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Counties()
         {
             var result = _geoDataService.GetCounties().ToList();
             return Ok(new { data = result });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Towns(GeoDataConditionModel vm)
         {
             var result = _geoDataService.GetTowns(vm.County).ToList();
             return Ok(new { data = result });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Villages(GeoDataConditionModel vm)
         {
             var result = _geoDataService.GetVillages(vm.County, vm.Town).ToList();
             return Ok(new { data = result });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult RandomPoints(GeoDataConditionModel vm)
         {
             var result = _geoDataService.GenerateRandomPoints(vm).ToList();
             return Ok(new { data = result });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult RandomPointsJsonFile(GeoDataConditionModel vm)
         {
             var stream = _geoDataService.GenerateRandomPointsJsonFile(vm);
             return File(stream, "application/json", "data.json");
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult RandomPointsCsvFile(GeoDataConditionModel vm)
         {
             var stream = _geoDataService.GenerateRandomPointsCsvFile(vm);
