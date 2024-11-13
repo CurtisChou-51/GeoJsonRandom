@@ -21,6 +21,7 @@
              * 初始化頁面資料
              */
             onMounted(async () => {
+                ajaxHelper.setAntiForgeryToken($('input:hidden[name="__RequestVerificationToken"]').val());
                 uiHelper.loadingStart();
                 await loadCounties();
                 uiHelper.loadingEnd();

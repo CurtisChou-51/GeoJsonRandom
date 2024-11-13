@@ -66,7 +66,8 @@ const ajaxHelper = (function () {
 
     function req(opt) {
         opt.headers = opt.headers || {};
-        opt.headers["RequestVerificationToken"] = _token;
+        if (_token)
+            opt.headers["RequestVerificationToken"] = _token;
         return processRespPromise(opt);
     }
     function post(url, data, options) {
