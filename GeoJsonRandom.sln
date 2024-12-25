@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoJsonRandom.Web", "GeoJso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoJsonRandom.Core", "GeoJsonRandom.Core\GeoJsonRandom.Core.csproj", "{CCD88CED-AF65-4FFB-9F38-4FC27E6144C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{C2968D99-1BBD-4B52-A1B0-CBDC6EC7C424}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CCD88CED-AF65-4FFB-9F38-4FC27E6144C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD88CED-AF65-4FFB-9F38-4FC27E6144C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCD88CED-AF65-4FFB-9F38-4FC27E6144C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2968D99-1BBD-4B52-A1B0-CBDC6EC7C424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2968D99-1BBD-4B52-A1B0-CBDC6EC7C424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2968D99-1BBD-4B52-A1B0-CBDC6EC7C424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2968D99-1BBD-4B52-A1B0-CBDC6EC7C424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
