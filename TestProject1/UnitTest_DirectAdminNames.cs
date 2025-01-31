@@ -4,12 +4,12 @@ using Moq;
 
 namespace TestProject1
 {
-    public class Tests
+    public class UnitTest_DirectAdminNames
     {
         private readonly Mock<IGeoJsonPrefixTreeBuilder> _mockGeoJsonPrefixTreeBuilder;
         private readonly GeoJsonRandomPointGenerator _geoJsonRandomPointGenerator;
 
-        public Tests()
+        public UnitTest_DirectAdminNames()
         {
             _mockGeoJsonPrefixTreeBuilder = new Mock<IGeoJsonPrefixTreeBuilder>();
             _geoJsonRandomPointGenerator = new GeoJsonRandomPointGenerator(_mockGeoJsonPrefixTreeBuilder.Object);
@@ -59,9 +59,9 @@ namespace TestProject1
             var result = _geoJsonRandomPointGenerator.GetDirectAdminNames(["CountyA"]).ToList();
 
             // Assert
-            Assert.True(result.Count == 2);
-            Assert.Contains("TownA1", result);
-            Assert.Contains("TownA2", result);
+            Assert.That(result.Count == 2, Is.True);
+            Assert.That(result, Does.Contain("TownA1"));
+            Assert.That(result, Does.Contain("TownA2"));
         }
 
         [Test]
@@ -73,8 +73,8 @@ namespace TestProject1
             var result = _geoJsonRandomPointGenerator.GetDirectAdminNames(["CountyB"]).ToList();
 
             // Assert
-            Assert.True(result.Count == 1);
-            Assert.Contains("TownB1", result);
+            Assert.That(result.Count == 1, Is.True);
+            Assert.That(result, Does.Contain("TownB1"));
         }
 
         [Test]
@@ -86,9 +86,9 @@ namespace TestProject1
             var result = _geoJsonRandomPointGenerator.GetDirectAdminNames(["CountyA", "TownA1"]).ToList();
 
             // Assert
-            Assert.True(result.Count == 2);
-            Assert.Contains("VillageA11", result);
-            Assert.Contains("VillageA12", result);
+            Assert.That(result.Count == 2, Is.True);
+            Assert.That(result, Does.Contain("VillageA11"));
+            Assert.That(result, Does.Contain("VillageA12"));
         }
 
         [Test]
@@ -100,7 +100,21 @@ namespace TestProject1
             var result = _geoJsonRandomPointGenerator.GetDirectAdminNames(["CountyXXX", "TownA1"]).ToList();
 
             // Assert
-            Assert.True(result.Count == 0);
+            Assert.That(result.Count == 0, Is.True);
+        }
+
+        [Test]
+        public void Test_Empty_Hierarchy()
+        {
+            // Arrange
+
+            // Act
+            var result = _geoJsonRandomPointGenerator.GetDirectAdminNames([]).ToList();
+
+            // Assert
+            Assert.That(result.Count == 2, Is.True);
+            Assert.That(result, Does.Contain("CountyA"));
+            Assert.That(result, Does.Contain("CountyB"));
         }
     }
 }
