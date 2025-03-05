@@ -1,0 +1,13 @@
+﻿@host=localhost:9401
+
+GET https://{{host}}/api/GeoData/RandomPoints/10
+###
+
+GET https://{{host}}/api/GeoData/RandomPoints/10/新北市
+###
+
+GET https://{{host}}/api/GeoData/RandomPoints/10/新北市/三重區
+
+###
+GET https://{{host}}/api/GeoData/RandomPoints/10/新北市/三重區/培德里
+###
